@@ -7,6 +7,7 @@ namespace Venhancer.Crowd.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class UserController : CustomBaseController
     {
         private readonly IUserService _userService;
@@ -24,8 +25,7 @@ namespace Venhancer.Crowd.API.Controllers
         public async Task<IActionResult> LoginUser(LoginDto loginDto)
         {
             return ActionResultInstance(await _userService.LoginUserAsync(loginDto));
-        }
-        [Authorize]
+        }       
         [HttpGet]
         public async Task<IActionResult> GetUser()
         {
