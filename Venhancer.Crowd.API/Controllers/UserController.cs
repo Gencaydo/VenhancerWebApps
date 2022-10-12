@@ -27,9 +27,9 @@ namespace Venhancer.Crowd.API.Controllers
             return ActionResultInstance(await _userService.LoginUserAsync(loginDto));
         }       
         [HttpGet]
-        public async Task<IActionResult> GetUser()
+        public async Task<IActionResult> GetUser(UserAppDto userAppDto)
         {
-            return ActionResultInstance(await _userService.GetUserByNameAsync(HttpContext.User.Identity.Name));
+            return ActionResultInstance(await _userService.GetUserByNameAsync(userAppDto.UserName));
         }
         [HttpPost]
         public async Task<IActionResult> ChangeUserPassword(LoginDto loginDto)
