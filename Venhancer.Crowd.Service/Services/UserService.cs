@@ -2,7 +2,7 @@
 using Venhancer.Crowd.Core.Dtos;
 using Venhancer.Crowd.Core.Models;
 using Venhancer.Crowd.Core.Services;
-using Venhancer.Crowd.Service;
+using Venhancer.Crowd.Service.Mapping;
 using Venhancer.Crowd.Shared.Dtos;
 
 namespace Venhancer.Crowd.Service.Services

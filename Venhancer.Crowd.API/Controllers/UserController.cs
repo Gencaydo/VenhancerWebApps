@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Venhancer.Crowd.Core.Dtos;
 using Venhancer.Crowd.Core.Services;
+using Venhancer.Crowd.Shared.Dtos;
 
 namespace Venhancer.Crowd.API.Controllers
 {
@@ -26,7 +27,7 @@ namespace Venhancer.Crowd.API.Controllers
         {
             return ActionResultInstance(await _userService.LoginUserAsync(loginDto));
         }       
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> GetUser(UserAppDto userAppDto)
         {
             return ActionResultInstance(await _userService.GetUserByNameAsync(userAppDto.UserName));

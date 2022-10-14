@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using Venhancer.Crowd.Core.Repository;
 using Venhancer.Crowd.Core.Services;
 using Venhancer.Crowd.Core.UniteOfWork;
-using Venhancer.Crowd.Service;
+using Venhancer.Crowd.Service.Mapping;
 using Venhancer.Crowd.Shared.Dtos;
 
 namespace Venhancer.Crowd.Service.Services

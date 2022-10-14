@@ -2,7 +2,9 @@
 {
     public class APIOptions
     {
-        public string? VenhancerCrowdWebAppAPIBaseUrl { get; set; }
-        public string? VenhancerAPIBaseUrl { get; set; }
+        public string? CrowAPIBaseUrl { get; set; }
+        public string? CrowAPICreateTokenUrl { get; set; }
+        public string? CrowAPISingInUrl { get; set; }
+        public string? CrowAPIGetUserDataUrl { get; set; }
     }
 }

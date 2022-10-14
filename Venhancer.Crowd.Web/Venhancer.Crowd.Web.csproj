@@ -10,6 +10,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Venhancer.Crowd.Core\Venhancer.Crowd.Core.csproj" />
+    <ProjectReference Include="..\Venhancer.Crowd.Shared\Venhancer.Crowd.Shared.csproj" />
   </ItemGroup>
 
 </Project>
