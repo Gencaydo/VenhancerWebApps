@@ -32,8 +32,8 @@ namespace Venhancer.Crowd.Web.Controllers
             {
                 /////////////////Get Token With User Credentinal////////////////////////////////
                 var createTokenResponse = await CallAPIService.CallTokenAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPICreateTokenUrl, loginDto);
-                if (string.IsNullOrEmpty(createTokenResponse)) return Response<NoDataDto>.Fail(new ErrorDto("UserName or Password Wrong!", true), 404);
                 var createTokenDto = JsonConvert.DeserializeObject<CreateTokenDto.Root>(createTokenResponse);
+                if (string.IsNullOrEmpty(createTokenResponse)) return Response<NoDataDto>.Fail(new ErrorDto("UserName or Password Wrong!", true), 404);
                 if (!createTokenDto.IsSuccessful) return Response<NoDataDto>.Fail(new ErrorDto("UserName or Password Wrong!", true), 404);
                 
                 /////////////////Authoriza With Token//////////////////////////////////////////

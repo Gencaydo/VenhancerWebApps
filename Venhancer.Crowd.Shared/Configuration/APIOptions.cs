@@ -6,5 +6,6 @@
         public string? CrowAPICreateTokenUrl { get; set; }
         public string? CrowAPISingInUrl { get; set; }
         public string? CrowAPIGetUserDataUrl { get; set; }
+        public string? CrowAPICreateUserUrl { get; set; }
     }
 }

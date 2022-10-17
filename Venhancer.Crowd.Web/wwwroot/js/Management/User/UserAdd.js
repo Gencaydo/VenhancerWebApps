@@ -1,4 +1,5 @@
 "use strict";
+var f;
 var KTUsersAddUser = function () {
     const t = document.getElementById("kt_modal_add_user"),
         e = t.querySelector("#kt_modal_add_user_form"),
@@ -21,6 +22,13 @@ var KTUsersAddUser = function () {
                                     message: "Valid email address is required"
                                 }
                             }
+                        },
+                        userpassword: {
+                            validators: {
+                                notEmpty: {
+                                    message: "Password is required"
+                                }
+                            }
                         }
                     },
                     plugins: {
@@ -37,9 +45,10 @@ var KTUsersAddUser = function () {
                     t.preventDefault(), o && o.validate().then((function (t) {
                         console.log("validated!"), "Valid" == t ? (i.setAttribute("data-kt-indicator", "on"), i.disabled = !0, setTimeout((function () {
                             i.removeAttribute("data-kt-indicator"),
-                                UserAdd(e.querySelector('[name="username"]').value,
+                                UserCreate(e.querySelector('[name="username"]').value,
                                     e.querySelector('[name="useremail"]').value,
-                                    e.querySelector('[name="usertypes"]:checked').value,t,e),
+                                    e.querySelector('[name="userpassword"]').value,
+                                    e.querySelector('[name="userrole"]:checked').value, e,n),
                                 i.disabled = !1
                         }), 2e3)) : Swal.fire({
                             text: "Sorry, looks like there are some errors detected, please try again.",
@@ -105,26 +114,27 @@ var KTUsersAddUser = function () {
 KTUtil.onDOMContentLoaded((function () {
     KTUsersAddUser.init()
 }));
-function UserAdd(username,useremail, userkeytypeid, t, e) {
-    var userDto = {
-        UserName: username,
-        Email: useremail
+function UserCreate(username, useremail, userpassword, userrole,e,n) {
+    var createUserDto = {
+        Username: username,
+        Email: useremail,
+        Password: userpassword,
+        PhoneNumber: ""
     };
     $.ajax({
-        url: "/User/AddUser",
+        url: "/Management/UserCreate",
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify(userDto),
+        data: JSON.stringify(createUserDto),
         success: function (response) {
             try {
                 if (response.IsSuccessful == false) {
                     MessageBox("error", response.Error.Errors[0])
                 }
                 else {
-                    //GetAllusers();
                     MessageBox("success", "user  " + username + " Added Successful!");
                     e.reset();
-                    t.hide();
+                    n.hide();
                 }
             } catch (e) {
                 MessageBox("error", "Add user Error.Please Contact with IT Departmant. Error Number : 1002");

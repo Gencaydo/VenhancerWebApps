@@ -32,16 +32,9 @@ var KTSigninGeneral = function () {
             }), e.addEventListener("click", (function (n) {
                 n.preventDefault(), i.validate().then((function (i) {
                     "Valid" == i ?
-                        grecaptcha.ready(function () {
-                                (e.setAttribute("data-kt-indicator", "on"), e.disabled = !0, setTimeout((function () {
-                                    e.removeAttribute("data-kt-indicator"),
-                                        UserLogin(t.querySelector('[name="email"]').value, t.querySelector('[name="password"]').value,e).then((function (e) {
-                                            e.isConfirmed && (t.querySelector('[name="email"]').value = "", t.querySelector('[name="password"]').value = "")
-                                        }))
-                                }), 2e3)).then((function (e) {
-                                    e.disabled = !1
-                                }))
-                        }) : MessageBox("error", "Sorry, looks like there are some errors detected, please check login form.");
+                        (e.setAttribute("data-kt-indicator", "on"), e.disabled = !0, 
+                                UserLogin(t.querySelector('[name="email"]').value, t.querySelector('[name="password"]').value, e))
+                        : MessageBox("error", "Sorry, looks like there are some errors detected, please check login form.");
                 }))
             }))
         }
@@ -75,12 +68,15 @@ function UserLogin(loginemail, loginpassword, e) {
             } catch {
                 MessageBox("error", "Login Error.Please Contact with IT Departmant. Error Number : 1003");
             }
+            e.disabled = !1;
+            e.removeAttribute("data-kt-indicator")
         },
         error: function (response) {
             MessageBox("error", "Sorry, Service not working., Please contact with IT department. Error Detail :" + response.message);
+            e.disabled = !1;
+            e.removeAttribute("data-kt-indicator")
         }
-    });
-    e.disabled = !1;
+    });  
 }
 function MessageBox(MessageType, MessageText) {
     Swal.fire({

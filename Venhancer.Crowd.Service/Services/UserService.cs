@@ -17,8 +17,11 @@ namespace Venhancer.Crowd.Service.Services
 
         public async Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto createUserDto)
         {
-            var user = new UserApp { Email = createUserDto.Email,UserName = createUserDto.UserName };
-            var result = await _userManager.CreateAsync(user,createUserDto.Password);
+            var username = createUserDto.Username?.Replace(" ","");
+            var usermail = createUserDto.Email?.Replace(" ", "");
+            var userpassword = createUserDto.Password?.Replace(" ", "");
+            var user = new UserApp { Email = usermail,UserName = username };
+            var result = await _userManager.CreateAsync(user,userpassword);
             if (!result.Succeeded)
             {
                 var Errors = result.Errors.Select(x =>x.Description).ToList();
@@ -36,7 +39,7 @@ namespace Venhancer.Crowd.Service.Services
         {
             if (loginDto == null) throw new ArgumentNullException(nameof(loginDto));
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
-            if (user == null) return Response<UserAppDto>.Fail(new ErrorDto("Email or Password is wrong", true), 400);
+            if (user == null) return Response<UserAppDto>.Fail(new ErrorDto("User not Found or Login Service not Working. Please Contact with Administrator", true), 400);
             if (!await _userManager.CheckPasswordAsync(user, loginDto.Password)) return Response<UserAppDto>.Fail(new ErrorDto("Email or Password is wrong", true), 400);
             var userdata = await _userManager.FindByIdAsync(user.Id);
             return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(userdata), 200);

@@ -21,8 +21,7 @@ namespace Venhancer.Crowd.Shared.Services
                 request.AddStringBody(body, ContentType.Json);
                 var response = await client.ExecutePostAsync(request);
 
-                if (response.StatusCode == HttpStatusCode.OK) return response.Content;
-                else return response.ErrorMessage;
+                return response.Content;
                 
             }
             catch (Exception ex)
