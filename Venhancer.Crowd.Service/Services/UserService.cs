@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 using Venhancer.Crowd.Core.Dtos;
 using Venhancer.Crowd.Core.Models;
 using Venhancer.Crowd.Core.Services;
@@ -49,6 +51,13 @@ namespace Venhancer.Crowd.Service.Services
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
             var userdata = await _userManager.AddPasswordAsync(user, loginDto.Password);
             return Response<UserAppDto>.Success(ObjectMapper.Mapper.Map<UserAppDto>(userdata), 200);
+        }
+
+        public async Task<Response<List<UserAppDto>>> GetAllUserAsync()
+        {
+            var user = await _userManager.Users.ToListAsync();
+            if (user == null) return Response<List<UserAppDto>>.Fail("User not found", 404, true);
+            return Response<List<UserAppDto>>.Success(ObjectMapper.Mapper.Map<List<UserAppDto>>(user), 200);
         }
     }
 }

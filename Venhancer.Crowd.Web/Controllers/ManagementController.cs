@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using RestSharp;
 using Venhancer.Crowd.Configuration;
 using Venhancer.Crowd.Core.Dtos;
 using Venhancer.Crowd.Shared.Dtos;
@@ -21,12 +22,17 @@ namespace Venhancer.Crowd.Web.Controllers
             return View();
         }
 
+        public IActionResult CreateUserCv()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<Response<CreateUserDto>> UserCreate([FromBody] CreateUserDto createUserDto)
         {
             try
             {
-                var createUserResponse = await CallAPIService.CallPostAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPICreateUserUrl, createUserDto, HttpContext.Session.GetString("AccessToken"));
+                var createUserResponse = await CallAPIService.CallAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPICreateUserUrl, createUserDto, HttpContext.Session.GetString("AccessToken"),Method.Post);
                 var createUserData = JsonConvert.DeserializeObject<Response<CreateUserDto>>(createUserResponse);
 
                 if (!createUserData.IsSuccessful) return Response<CreateUserDto>.Fail(new ErrorDto(createUserData.Error.Errors, true), 404);

@@ -7,6 +7,7 @@ namespace Venhancer.Crowd.Core.Services
     {
         Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto createUserDto);
         Task<Response<UserAppDto>> GetUserByNameAsync(string userName);
+        Task<Response<List<UserAppDto>>> GetAllUserAsync();
         Task<Response<UserAppDto>> LoginUserAsync(LoginDto loginDto);
         Task<Response<UserAppDto>> ChangeUserPasswordAsync(LoginDto loginDto);
     }

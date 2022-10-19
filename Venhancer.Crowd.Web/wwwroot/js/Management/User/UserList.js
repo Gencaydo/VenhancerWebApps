@@ -1,12 +1,13 @@
 "use strict";
-var KTUsersList = function () {
-    var e, t, n, r, o = document.getElementById("kt_table_users"),
+var userDataSet;
+var KTUserList = function () {
+    var e, t, n, r, o = document.getElementById("kt_user_table"),
         c = () => {
-            o.querySelectorAll('[data-kt-users-table-filter="delete_row"]').forEach((t => {
+            o.querySelectorAll('[data-kt-user-table-filter="delete_row"]').forEach((t => {
                 t.addEventListener("click", (function (t) {
                     t.preventDefault();
                     const n = t.target.closest("tr"),
-                        r = n.querySelectorAll("td")[1].querySelectorAll("a")[1].innerText;
+                        r = n.querySelectorAll("td")[2].innerText;
                     Swal.fire({
                         text: "Are you sure you want to delete " + r + "?",
                         icon: "warning",
@@ -104,50 +105,107 @@ var KTUsersList = function () {
     };
     return {
         init: function () {
-            o && (o.querySelectorAll("tbody tr").forEach((e => {
-                const t = e.querySelectorAll("td"),
-                    n = t[3].innerText.toLowerCase();
-                let r = 0,
-                    o = "minutes";
-                n.includes("yesterday") ? (r = 1, o = "days") : n.includes("mins") ? (r = parseInt(n.replace(/\D/g, "")), o = "minutes") : n.includes("hours") ? (r = parseInt(n.replace(/\D/g, "")), o = "hours") : n.includes("days") ? (r = parseInt(n.replace(/\D/g, "")), o = "days") : n.includes("weeks") && (r = parseInt(n.replace(/\D/g, "")), o = "weeks");
-                const c = moment().subtract(r, o).format();
-                t[3].setAttribute("data-order", c);
-                const l = moment(t[5].innerHTML, "DD MMM YYYY, LT").format();
-                t[5].setAttribute("data-order", l)
-            })), (e = $(o).DataTable({
-                info: !1,
-                order: [],
-                pageLength: 10,
-                lengthChange: !1,
-                columnDefs: [{
-                    orderable: !1,
-                    targets: 0
-                }, {
-                    orderable: !1,
-                    targets: 5
-                }]
-            })).on("draw", (function () {
-                l(), c(), a()
-            })), l(), document.querySelector('[data-kt-user-table-filter="search"]').addEventListener("keyup", (function (t) {
-                e.search(t.target.value).draw()
-            })), document.querySelector('[data-kt-user-table-filter="reset"]').addEventListener("click", (function () {
-                document.querySelector('[data-kt-user-table-filter="form"]').querySelectorAll("select").forEach((e => {
-                    $(e).val("").trigger("change")
-                })), e.search("").draw()
-            })), c(), (() => {
-                const t = document.querySelector('[data-kt-user-table-filter="form"]'),
-                    n = t.querySelector('[data-kt-user-table-filter="filter"]'),
-                    r = t.querySelectorAll("select");
-                n.addEventListener("click", (function () {
-                    var t = "";
-                    r.forEach(((e, n) => {
-                        e.value && "" !== e.value && (0 !== n && (t += " "), t += e.value)
-                    })), e.search(t).draw()
-                }))
-            })())
+            try {
+                o && (o.querySelectorAll("tbody tr"),
+                    (e = $(o).DataTable({
+                        info: !1,
+                        order: [],
+                        data: userDataSet,
+                        destroy: true,
+                        processing: 'Please wait...',
+                        columnDefs: [{
+                            orderable: !1,
+                            targets: 0,
+                            'render': function (data, type, full, meta) {
+                                return "<div class='form-check form-check-sm form-check-custom form-check-solid'>" +
+                                    "<input class='form-check-input' type='checkbox' value='1' />" +
+                                    "</div>"
+                            }
+                        },
+                        {
+                            targets: 1,
+                            data: "Id"
+                        },
+                        {
+                            targets: 2,
+                            data: "UserName"
+                        },
+                        {
+                            targets: 3,
+                            data: "Email"
+                        },
+                        {
+                            targets: 4,
+                            data: "PhoneNumber"
+                        },
+                        {
+                            targets: 5,
+                            'render': function (data, type, full, meta) {
+                                return "<a href='#' class='btn btn-sm btn-light btn-active-light-primary' data-kt-menu-trigger='click' data-kt-menu-placement='bottom-end'>Actions" +
+                                    "<span class='svg-icon svg-icon-5 m-0'>" +
+                                    "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'>" +
+                                    "<path d='M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z' fill='black' />" +
+                                    "</svg>" +
+                                    "</span>" +
+                                    "</a>" +
+                                    "<div class='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4' data-kt-menu='true'>" +
+                                    "<div class='menu-item px-3'>" +
+                                    "<a href='#' class='menu-link px-3' data-kt-user-table-filter='delete_row'>Delete</a>" +
+                                    "</div>" +
+                                    "<div class='menu-item px-3'>" +
+                                    "<a href='#' class='menu-link px-3' data-bs-toggle='modal' data-bs-target='#kt_modal_update_user' data-kt-game-table-filter='update_row'>Update</a>"
+                                "</div>" +
+                                    "</div>"
+                            }
+                        }]
+                    })).on("draw", (function () {
+                        l(), c(), a()
+                    })), l(), document.querySelector('[data-kt-user-table-filter="search"]').addEventListener("keyup", (function (t) {
+                        e.search(t.target.value).draw()
+                        KTMenu.createInstances();
+                    })), document.querySelector('[data-kt-user-table-filter="reset"]').addEventListener("click", (function () {
+                        document.querySelector('[data-kt-user-table-filter="form"]').querySelectorAll("select").forEach((e => {
+                            $(e).val("").trigger("change")
+                        })), e.search("").draw()
+                        KTMenu.createInstances();
+                    })), c(), (() => {
+                        const t = document.querySelector('[data-kt-user-table-filter="form"]'),
+                            n = t.querySelector('[data-kt-user-table-filter="filter"]'),
+                            r = t.querySelectorAll("select");
+                        n.addEventListener("click", (function () {
+                            var t = "";
+                            r.forEach(((e, n) => {
+                                e.value && "" !== e.value && (0 !== n && (t += " "), t += e.value)
+                            })), e.search(t).draw()
+                        }))
+                    KTMenu.createInstances();
+                    })())
+            } catch (e) {
+                MessageBox("error", e.Message);
+            }
         }
     }
 }();
 KTUtil.onDOMContentLoaded((function () {
-    KTUsersList.init()
+    GetAllUser();
 }));
+function GetAllUser() {
+    $.ajax({
+        type: "GET",
+        url: "/User/GetAllUser",
+        success: function (response) {
+            if (response != null) {
+                userDataSet = response.Data;
+                KTUserList.init();
+            } else {
+                MessageBox("error", "User Data not found please contact with IT!");
+            }
+        },
+        failure: function (response) {
+            MessageBox("error", "User Data not found please contact with IT! Error Detail : " + response.responseText);
+        },
+        error: function (response) {
+            MessageBox("error", "User Data not found please contact with IT! Error Detail : " + response.responseText);
+        }
+    });
+}

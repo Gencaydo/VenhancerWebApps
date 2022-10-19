@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using RestSharp;
 using System.Diagnostics;
 using Venhancer.Crowd.Configuration;
 using Venhancer.Crowd.Core.Dtos;
@@ -37,7 +38,7 @@ namespace Venhancer.Crowd.Web.Controllers
             userAppDto.UserName = HttpContext.Session.GetString("UserName");
             try
             {
-                var userAuthorizationResponse = await CallAPIService.CallPostAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPIGetUserDataUrl, userAppDto, HttpContext.Session.GetString("AccessToken"));
+                var userAuthorizationResponse = await CallAPIService.CallAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPIGetUserDataUrl, userAppDto, HttpContext.Session.GetString("AccessToken"),Method.Post);
                 var userAppData = JsonConvert.DeserializeObject<Response<UserAppDto>>(userAuthorizationResponse);
 
                 if (!userAppData.IsSuccessful) return Response<UserAppDto>.Fail(new ErrorDto("Authorization Error Please Contact With Admin!", true), 404);

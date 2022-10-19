@@ -32,6 +32,11 @@ namespace Venhancer.Crowd.API.Controllers
         {
             return ActionResultInstance(await _userService.GetUserByNameAsync(userAppDto.UserName));
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAllUser()
+        {
+            return ActionResultInstance(await _userService.GetAllUserAsync());
+        }
         [HttpPost]
         public async Task<IActionResult> ChangeUserPassword(LoginDto loginDto)
         {

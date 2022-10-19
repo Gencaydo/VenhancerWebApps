@@ -57,7 +57,6 @@ function UserLogin(loginemail, loginpassword, e) {
         contentType: 'application/json',
         data: JSON.stringify(loginDto),
         success: function (response) {
-            var a = response;
             try {
                 if (response.IsSuccessful == false) {
                     MessageBox("error", response.Error.Errors[0])

@@ -1,6 +1,6 @@
 "use strict";
 var f;
-var KTUsersAddUser = function () {
+var KTuserAddUser = function () {
     const t = document.getElementById("kt_modal_add_user"),
         e = t.querySelector("#kt_modal_add_user_form"),
         n = new bootstrap.Modal(t);
@@ -40,7 +40,7 @@ var KTUsersAddUser = function () {
                         })
                     }
                 });
-                const i = t.querySelector('[data-kt-users-modal-action="submit"]');
+                const i = t.querySelector('[data-kt-user-modal-action="submit"]');
                 i.addEventListener("click", (t => {
                     t.preventDefault(), o && o.validate().then((function (t) {
                         console.log("validated!"), "Valid" == t ? (i.setAttribute("data-kt-indicator", "on"), i.disabled = !0, setTimeout((function () {
@@ -60,7 +60,7 @@ var KTUsersAddUser = function () {
                             }
                         })
                     }))
-                })), t.querySelector('[data-kt-users-modal-action="cancel"]').addEventListener("click", (t => {
+                })), t.querySelector('[data-kt-user-modal-action="cancel"]').addEventListener("click", (t => {
                     t.preventDefault(), Swal.fire({
                         text: "Are you sure you would like to cancel?",
                         icon: "warning",
@@ -83,7 +83,7 @@ var KTUsersAddUser = function () {
                             }
                         })
                     }))
-                })), t.querySelector('[data-kt-users-modal-action="close"]').addEventListener("click", (t => {
+                })), t.querySelector('[data-kt-user-modal-action="close"]').addEventListener("click", (t => {
                     t.preventDefault(), Swal.fire({
                         text: "Are you sure you would like to cancel?",
                         icon: "warning",
@@ -112,7 +112,7 @@ var KTUsersAddUser = function () {
     }
 }();
 KTUtil.onDOMContentLoaded((function () {
-    KTUsersAddUser.init()
+    KTuserAddUser.init()
 }));
 function UserCreate(username, useremail, userpassword, userrole,e,n) {
     var createUserDto = {
@@ -133,6 +133,7 @@ function UserCreate(username, useremail, userpassword, userrole,e,n) {
                 }
                 else {
                     MessageBox("success", "user  " + username + " Added Successful!");
+                    GetAllUser();
                     e.reset();
                     n.hide();
                 }

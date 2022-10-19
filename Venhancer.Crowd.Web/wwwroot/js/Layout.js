@@ -11,7 +11,7 @@ var KTLayoutGeneral = function () {
                         document.querySelector("#lblName1").innerHTML = response.Data.UserName;
                         document.querySelector("#lblNameSurename1").innerHTML = document.querySelector("#lblNameSurename1").innerHTML = response.Data.UserName;
                         document.querySelector("#lblEmailAdress1").innerHTML = document.querySelector("#lblEmailAdress2").innerHTML = response.Data.Email;
-                        LoginUserId = obj.Data.Id;
+                        //LoginUserId = obj.Data.Id;
                     } else {
                         MessageBox("error", "User Data not found please contact with IT!");
                     }
