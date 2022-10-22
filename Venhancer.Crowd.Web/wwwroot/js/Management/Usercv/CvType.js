@@ -5,7 +5,7 @@ var KTModalCreateCvType = function () {
         init: function () {
             o = KTModalCreateCv.getForm(), r = KTModalCreateCv.getStepperObj(), e = KTModalCreateCv.getStepper().querySelector('[data-kt-element="type-next"]'), t = FormValidation.formValidation(o, {
                 fields: {
-                    cv_type: {
+                    cvtype: {
                         validators: {
                             notEmpty: {
                                 message: "Cv type is required"

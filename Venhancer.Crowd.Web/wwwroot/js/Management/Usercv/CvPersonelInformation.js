@@ -9,24 +9,38 @@ var KTModalCreateCvPersonelInformation = function () {
                 dateFormat: "d, M Y, H:i"
             }), i = FormValidation.formValidation(o, {
                 fields: {
-                    cv_name: {
+                    cvname: {
                         validators: {
                             notEmpty: {
                                 message: "Cv name is required"
                             }
                         }
                     },
-                    information_description: {
+                    firstname: {
                         validators: {
                             notEmpty: {
-                                message: "Description is required"
+                                message: "First Name is required"
                             }
                         }
                     },
-                    information_release_date: {
+                    lastname: {
                         validators: {
                             notEmpty: {
-                                message: "Release date is required"
+                                message: "Last Name is required"
+                            }
+                        }
+                    },
+                    dateofbirth: {
+                        validators: {
+                            notEmpty: {
+                                message: "Date of birth is required"
+                            }
+                        }
+                    },
+                    homeaddress: {
+                        validators: {
+                            notEmpty: {
+                                message: "Description is required"
                             }
                         }
                     },
