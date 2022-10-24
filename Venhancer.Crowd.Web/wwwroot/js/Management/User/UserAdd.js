@@ -1,5 +1,4 @@
 "use strict";
-var f;
 var KTuserAddUser = function () {
     const t = document.getElementById("kt_modal_add_user"),
         e = t.querySelector("#kt_modal_add_user_form"),
