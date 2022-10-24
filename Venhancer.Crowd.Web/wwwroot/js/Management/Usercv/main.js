@@ -22,7 +22,7 @@ var KTModalCreateCv = function () {
     }
 }();
 KTUtil.onDOMContentLoaded((function () {
-    document.querySelector("#kt_modal_create_cv") && (KTModalCreateCv.init(),
+    document.querySelector("#kt_modal_create_cv") && document.querySelector("#kt_modal_add_experience") && (KTModalCreateCv.init(),
         KTModalCreateCvType.init(),
         KTModalCreateCvPersonelInformation.init(),
         KTModalCreateExrepienceInformation.init(),       

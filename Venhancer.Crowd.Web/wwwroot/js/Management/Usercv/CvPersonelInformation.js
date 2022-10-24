@@ -3,7 +3,10 @@ var KTModalCreateCvPersonelInformation = function () {
     var e, t, i, o, r;
     return {
         init: function () {
-            o = KTModalCreateCv.getForm(), r = KTModalCreateCv.getStepperObj(), e = KTModalCreateCv.getStepper().querySelector('[data-kt-element="information-next"]'), t = KTModalCreateCv.getStepper().querySelector('[data-kt-element="information-previous"]')
+                o = KTModalCreateCv.getForm(),
+                r = KTModalCreateCv.getStepperObj(),
+                e = KTModalCreateCv.getStepper().querySelector('[data-kt-element="information-next"]'),
+                t = KTModalCreateCv.getStepper().querySelector('[data-kt-element="information-previous"]')
                 $(o.querySelector('[name="information_release_date"]')).flatpickr({
                 enableTime: !0,
                 dateFormat: "d, M Y, H:i"
