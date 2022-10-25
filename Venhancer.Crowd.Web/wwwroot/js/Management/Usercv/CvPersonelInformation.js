@@ -85,7 +85,7 @@ var KTModalCreateCvPersonelInformation = function () {
 }();
 "undefined" != typeof module && void 0 !== module.exports && (window.KTModalCreateCvPersonelInformation = module.exports = KTModalCreateCvPersonelInformation);
 var KTExperienceAdd = function () {
-    const t = o.getElementById("kt_modal_add_experience"),
+    const t = document.getElementById("kt_modal_add_experience"),
         e = t.querySelector("#kt_modal_add_experience_form"),
         n = new bootstrap.Modal(t);
     return {
@@ -195,3 +195,4 @@ var KTExperienceAdd = function () {
         }
     }
 }();
+"undefined" != typeof module && void 0 !== module.exports && (window.KTExperienceAdd = module.exports = KTExperienceAdd);
