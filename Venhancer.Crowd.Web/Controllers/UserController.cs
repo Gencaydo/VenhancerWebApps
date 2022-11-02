@@ -55,7 +55,7 @@ namespace Venhancer.Crowd.Web.Controllers
             }
             catch (Exception ex)
             {
-                return Response<NoDataDto>.Fail(new ErrorDto(ex.Message + " " + _apiOptions.CrowAPIBaseUrl + _apiOptions.CrowAPICreateTokenUrl + loginDto.Email + loginDto.Password, true), 404);
+                return Response<NoDataDto>.Fail(new ErrorDto("Authorization Error Please Contact With Admin!", true), 404);
             }
         }
         [HttpGet]

@@ -44,5 +44,23 @@ namespace Venhancer.Crowd.Web.Controllers
                 return Response<CreateUserDto>.Fail(new ErrorDto(ex.Message, true), 404);
             }
         }
+
+        [HttpPost]
+        public async Task<Response<CreateUserDto>> CreateUserCV([FromBody] CreateUserCVDto createUserCVDto)
+        {
+            try
+            {
+                var createUserResponse = await CallAPIService.CallAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPICreateUserUrl, createUserCVDto, HttpContext.Session.GetString("AccessToken"), Method.Post);
+                var createUserData = JsonConvert.DeserializeObject<Response<CreateUserDto>>(createUserResponse);
+
+                if (!createUserData.IsSuccessful) return Response<CreateUserDto>.Fail(new ErrorDto(createUserData.Error.Errors, true), 404);
+
+                return Response<CreateUserDto>.Success(ObjectMapper.Mapper.Map<CreateUserDto>(createUserData.Data), 200);
+            }
+            catch (Exception ex)
+            {
+                return Response<CreateUserDto>.Fail(new ErrorDto(ex.Message, true), 404);
+            }
+        }
     }
 }

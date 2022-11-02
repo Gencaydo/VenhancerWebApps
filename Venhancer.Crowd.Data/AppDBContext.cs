@@ -12,6 +12,7 @@ namespace Venhancer.Crowd.Data
 
         }
         public DbSet<UserRefreshToken> UserRefreshTokens { get; set; }
+        public DbSet<CreateUserCV> UserCV { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(GetType().Assembly);

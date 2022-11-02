@@ -3,7 +3,7 @@ var KTModalCreateExrepienceInformation = function () {
     var e, t, a, r, o;
     return {
         init: function () {
-            r = KTModalCreateCv.getForm(),
+                r = KTModalCreateCv.getForm(),
                 o = KTModalCreateCv.getStepperObj(),
                 e = KTModalCreateCv.getStepper().querySelector('[data-kt-element="experience-next"]'),
                 t = KTModalCreateCv.getStepper().querySelector('[data-kt-element="experience-previous"]'),
