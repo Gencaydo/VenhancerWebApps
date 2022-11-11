@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Venhancer.Crowd.Core.Repository;
+using Venhancer.Crowd.Identity.Core.Repository;
 using Venhancer.Crowd.Identity.Core.Services;
-using Venhancer.Crowd.Core.UniteOfWork;
-using Venhancer.Crowd.Service.Mapping;
+using Venhancer.Crowd.Identity.Core.UniteOfWork;
+using Venhancer.Crowd.Identity.Service.Mapping;
 using Venhancer.Crowd.Identity.Shared.Dtos;
 
-namespace Venhancer.Crowd.Service.Services
+namespace Venhancer.Crowd.Identity.Service.Services
 {
     public class GenericService<TEntity, TDto> : IGenericService<TEntity, TDto> where TEntity : class where TDto : class
     {

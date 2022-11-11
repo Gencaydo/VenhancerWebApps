@@ -11,7 +11,7 @@ using Venhancer.Crowd.Identity.Core.Services;
 using Venhancer.Crowd.Identity.Shared.Configuration;
 using Venhancer.Crowd.Identity.Shared.Services;
 
-namespace Venhancer.Crowd.Service.Services
+namespace Venhancer.Crowd.Identity.Service.Services
 {
     public class TokenService : ITokenService
     {

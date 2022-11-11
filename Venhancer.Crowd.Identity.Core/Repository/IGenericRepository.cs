@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Venhancer.Crowd.Core.Repository
+namespace Venhancer.Crowd.Identity.Core.Repository
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {

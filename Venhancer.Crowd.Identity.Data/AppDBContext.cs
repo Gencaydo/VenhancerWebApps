@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Venhancer.Crowd.Identity.Core.Models;
 
-namespace Venhancer.Crowd.Data
+namespace Venhancer.Crowd.Identity.Data
 {
     public class AppDBContext : IdentityDbContext<UserApp, IdentityRole, string>
     {

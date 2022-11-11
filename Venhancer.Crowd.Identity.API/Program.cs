@@ -1,18 +1,17 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Venhancer.Crowd.Identity.Core.Repository;
+using Venhancer.Crowd.Identity.Core.UniteOfWork;
+using Venhancer.Crowd.Identity.Data;
+using Venhancer.Crowd.Identity.Data.Repositories;
 using Venhancer.Crowd.Identity.Core.Confugiration;
 using Venhancer.Crowd.Identity.Core.Models;
-using Venhancer.Crowd.Core.Repository;
 using Venhancer.Crowd.Identity.Core.Services;
-using Venhancer.Crowd.Core.UniteOfWork;
-using Venhancer.Crowd.Data;
-using Venhancer.Crowd.Data.Repositories;
-using Venhancer.Crowd.Service.Services;
 using Venhancer.Crowd.Identity.Shared.Configuration;
 using Venhancer.Crowd.Identity.Shared.Services;
+using Venhancer.Crowd.Identity.Service.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

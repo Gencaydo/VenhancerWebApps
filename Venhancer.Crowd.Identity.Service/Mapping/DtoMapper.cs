@@ -2,7 +2,7 @@
 using Venhancer.Crowd.Identity.Core.Dtos;
 using Venhancer.Crowd.Identity.Core.Models;
 
-namespace Venhancer.Crowd.Service.Mapping
+namespace Venhancer.Crowd.Identity.Service.Mapping
 {
     internal class DtoMapper:Profile
     {

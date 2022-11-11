@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Venhancer.Crowd.Core.Repository;
+using Venhancer.Crowd.Identity.Core.Repository;
 
-namespace Venhancer.Crowd.Data.Repositories
+namespace Venhancer.Crowd.Identity.Data.Repositories
 {
     public class GenericRepository<Tentity> : IGenericRepository<Tentity> where Tentity : class
     {

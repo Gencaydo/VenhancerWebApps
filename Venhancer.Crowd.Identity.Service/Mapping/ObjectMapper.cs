@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Venhancer.Crowd.Service.Mapping
+namespace Venhancer.Crowd.Identity.Service.Mapping
 {
     public static class ObjectMapper
     {

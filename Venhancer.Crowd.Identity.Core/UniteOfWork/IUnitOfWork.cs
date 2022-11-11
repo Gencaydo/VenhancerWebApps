@@ -1,4 +1,4 @@
-﻿namespace Venhancer.Crowd.Core.UniteOfWork
+﻿namespace Venhancer.Crowd.Identity.Core.UniteOfWork
 {
     public interface IUnitOfWork
     {

@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 using Venhancer.Crowd.Identity.Core.Dtos;
 using Venhancer.Crowd.Identity.Core.Models;
 using Venhancer.Crowd.Identity.Core.Services;
-using Venhancer.Crowd.Service.Mapping;
+using Venhancer.Crowd.Identity.Service.Mapping;
 using Venhancer.Crowd.Identity.Shared.Dtos;
 
-namespace Venhancer.Crowd.Service.Services
+namespace Venhancer.Crowd.Identity.Service.Services
 {
     public class UserService : IUserService
     {

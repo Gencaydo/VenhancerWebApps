@@ -4,12 +4,12 @@ using Microsoft.Extensions.Options;
 using Venhancer.Crowd.Identity.Core.Confugiration;
 using Venhancer.Crowd.Identity.Core.Dtos;
 using Venhancer.Crowd.Identity.Core.Models;
-using Venhancer.Crowd.Core.Repository;
+using Venhancer.Crowd.Identity.Core.Repository;
 using Venhancer.Crowd.Identity.Core.Services;
-using Venhancer.Crowd.Core.UniteOfWork;
+using Venhancer.Crowd.Identity.Core.UniteOfWork;
 using Venhancer.Crowd.Identity.Shared.Dtos;
 
-namespace Venhancer.Crowd.Service.Services
+namespace Venhancer.Crowd.Identity.Service.Services
 {
     public class AuthenticationService : IAuthenticationService
     {

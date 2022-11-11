@@ -6,7 +6,7 @@ using Venhancer.Crowd.Configuration;
 using Venhancer.Crowd.Identity.Core.Dtos;
 using Venhancer.Crowd.Identity.Shared.Dtos;
 using Venhancer.Crowd.Identity.Shared.Services;
-using Venhancer.Crowd.Web.Mapping;
+using Venhancer.Crowd.Identity.Web.Mapping;
 
 namespace Venhancer.Crowd.Identity.Web.Controllers
 {
