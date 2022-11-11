@@ -1,4 +1,4 @@
-﻿namespace Venhancer.Crowd.Configuration
+﻿namespace Venhancer.Crowd.Identity.Shared.Configuration
 {
     public class APIOptions
     {

@@ -1,4 +1,4 @@
-using Venhancer.Crowd.Configuration;
+using Venhancer.Crowd.Identity.Shared.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 

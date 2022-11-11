@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
-using Venhancer.Crowd.Configuration;
+using Venhancer.Crowd.Identity.Shared.Configuration;
 using Venhancer.Crowd.Identity.Core.Dtos;
 using Venhancer.Crowd.Identity.Shared.Dtos;
 using Venhancer.Crowd.Identity.Shared.Services;

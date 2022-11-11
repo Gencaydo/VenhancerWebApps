@@ -2,14 +2,11 @@
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
-using System.Diagnostics;
-using Venhancer.Crowd.Configuration;
 using Venhancer.Crowd.Identity.Core.Dtos;
-using Venhancer.Crowd.Identity.Core.Models;
+using Venhancer.Crowd.Identity.Shared.Configuration;
 using Venhancer.Crowd.Identity.Shared.Dtos;
 using Venhancer.Crowd.Identity.Shared.Services;
 using Venhancer.Crowd.Identity.Web.Mapping;
-using Venhancer.Crowd.Web.Models;
 
 namespace Venhancer.Crowd.Identity.Web.Controllers
 {
@@ -49,12 +46,6 @@ namespace Venhancer.Crowd.Identity.Web.Controllers
             {
                 return Response<UserAppDto>.Fail(new ErrorDto(ex.Message, true), 404);
             }
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
