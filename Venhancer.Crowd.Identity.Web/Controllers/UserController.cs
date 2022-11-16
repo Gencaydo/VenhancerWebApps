@@ -23,7 +23,7 @@ namespace Venhancer.Crowd.Identity.Web.Controllers
         }
         public IActionResult _SignOut()
         {
-            return Redirect("~/Login");
+            return Redirect("~/User/Login");
         }
 
         [HttpPost]
@@ -39,7 +39,7 @@ namespace Venhancer.Crowd.Identity.Web.Controllers
                 if (!createTokenDto.IsSuccessful) return Response<NoDataDto>.Fail(new ErrorDto("UserName or Password Wrong!", true), 404);
 
                 /////////////////Authoriza With Token//////////////////////////////////////////
-                var userAuthorizationResponse = await CallAPIService.CallAuthorizationAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPISingInUrl, loginDto, createTokenDto.Data.AccessToken);
+                var userAuthorizationResponse = await CallAPIService.CallAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPISingInUrl, loginDto, createTokenDto.Data.AccessToken, Method.Post);
                 var userAppDto = JsonConvert.DeserializeObject<Response<UserAppDto>>(userAuthorizationResponse);
 
                 if (!userAppDto.IsSuccessful) return Response<NoDataDto>.Fail(new ErrorDto("Authorization Error Please Contact With Admin!", true), 404);
