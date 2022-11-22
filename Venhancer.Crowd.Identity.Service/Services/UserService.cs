@@ -21,7 +21,7 @@ namespace Venhancer.Crowd.Identity.Service.Services
             var username = createUserDto.Username?.Replace(" ","");
             var usermail = createUserDto.Email?.Replace(" ", "");
             var userpassword = createUserDto.Password?.Replace(" ", "");
-            var user = new UserApp { Email = usermail,UserName = username };
+            var user = new UserApp { Email = usermail,UserName = username,IsActive = true};
             var result = await _userManager.CreateAsync(user,userpassword);
             if (!result.Succeeded)
             {
@@ -57,6 +57,15 @@ namespace Venhancer.Crowd.Identity.Service.Services
             var user = await _userManager.Users.ToListAsync();
             if (user == null) return Response<List<UserAppDto>>.Fail("User not found", 404, true);
             return Response<List<UserAppDto>>.Success(ObjectMapper.Mapper.Map<List<UserAppDto>>(user), 200);
+        }
+
+        public async Task<Response<NoDataDto>> RemoveUserAsync(UserAppDto userAppDto)
+        {
+            var user = ObjectMapper.Mapper.Map<UserApp>(userAppDto);
+            user.IsActive = false;
+            var result = await _userManager.UpdateAsync(user);
+            if (result == null) return Response<NoDataDto>.Fail("User not found", 404, true);
+            return Response<NoDataDto>.Success(200);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Venhancer.Crowd.Identity.Web.Controllers
             try
             {
                 /////////////////Get Token With User Credentinal////////////////////////////////
-                createTokenResponse = await CallAPIService.CallTokenAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPICreateTokenUrl, loginDto);
+                createTokenResponse = await CallAPIService.CallAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPICreateTokenUrl, loginDto, null, Method.Post);
                 var createTokenDto = JsonConvert.DeserializeObject<CreateTokenDto.Root>(createTokenResponse);
                 if (string.IsNullOrEmpty(createTokenResponse)) return Response<NoDataDto>.Fail(new ErrorDto("UserName or Password Wrong!", true), 404);
                 if (!createTokenDto.IsSuccessful) return Response<NoDataDto>.Fail(new ErrorDto("UserName or Password Wrong!", true), 404);

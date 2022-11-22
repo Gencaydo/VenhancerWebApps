@@ -8,7 +8,6 @@ namespace Venhancer.Crowd.Identity.API.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    [Authorize]
     public class UserController : CustomBaseController
     {
         private readonly IUserService _userService;
@@ -23,20 +22,28 @@ namespace Venhancer.Crowd.Identity.API.Controllers
             return ActionResultInstance(await _userService.CreateUserAsync(createUserDto));
         }
         [HttpPost]
+        public async Task<IActionResult> RemoveUser(UserAppDto userAppDto)
+        {
+            return ActionResultInstance(await _userService.RemoveUserAsync(userAppDto));
+        }
+        [HttpPost]
         public async Task<IActionResult> LoginUser(LoginDto loginDto)
         {
             return ActionResultInstance(await _userService.LoginUserAsync(loginDto));
-        }       
+        }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> GetUser(UserAppDto userAppDto)
         {
             return ActionResultInstance(await _userService.GetUserByNameAsync(userAppDto.UserName));
         }
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllUser()
         {
             return ActionResultInstance(await _userService.GetAllUserAsync());
         }
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ChangeUserPassword(LoginDto loginDto)
         {

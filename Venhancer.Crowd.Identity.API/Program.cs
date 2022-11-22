@@ -26,7 +26,7 @@ builder.Services.AddDbContext<AppDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("VBT_CLOUD_1"), sqlOptions =>
     {
-        sqlOptions.MigrationsAssembly("Venhancer.Crowd.Data");
+        sqlOptions.MigrationsAssembly("Venhancer.Crowd.Identity.Data");
     });
 });
 
