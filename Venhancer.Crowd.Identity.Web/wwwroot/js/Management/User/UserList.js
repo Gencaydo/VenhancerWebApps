@@ -1,13 +1,14 @@
 "use strict";
 var userDataSet;
 var KTUserList = function () {
-    var e, t, n, r, o = document.getElementById("kt_user_table"),
+    var e, t, n, r, k, o = document.getElementById("kt_user_table"),
         c = () => {
             o.querySelectorAll('[data-kt-user-table-filter="delete_row"]').forEach((t => {
                 t.addEventListener("click", (function (t) {
                     t.preventDefault();
                     const n = t.target.closest("tr"),
                         r = n.querySelectorAll("td")[2].innerText;
+                        k = n.querySelectorAll("td")[1].innerText;
                     Swal.fire({
                         text: "Are you sure you want to delete " + r + "?",
                         icon: "warning",
@@ -29,6 +30,7 @@ var KTUserList = function () {
                                 confirmButton: "btn fw-bold btn-primary"
                             }
                         }).then((function () {
+                            RemoveUser(k);
                             e.row($(n)).remove().draw()
                         })).then((function () {
                             a()
@@ -193,6 +195,31 @@ function GetAllUser() {
     $.ajax({
         type: "GET",
         url: "/User/GetAllUser",
+        success: function (response) {
+            if (response != null) {
+                userDataSet = response.Data;
+                KTUserList.init();
+            } else {
+                MessageBox("error", "User Data not found please contact with IT!");
+            }
+        },
+        failure: function (response) {
+            MessageBox("error", "User Data not found please contact with IT! Error Detail : " + response.responseText);
+        },
+        error: function (response) {
+            MessageBox("error", "User Data not found please contact with IT! Error Detail : " + response.responseText);
+        }
+    });
+}
+function RemoveUser(userid) {
+    var userAppDto = {
+        Id: userid
+    };
+    $.ajax({
+        type: "POST",
+        url: "/Management/UserRemove",
+        contentType: 'application/json',
+        data: JSON.stringify(userAppDto),
         success: function (response) {
             if (response != null) {
                 userDataSet = response.Data;

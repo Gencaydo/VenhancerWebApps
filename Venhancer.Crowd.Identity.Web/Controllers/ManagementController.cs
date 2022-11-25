@@ -46,20 +46,20 @@ namespace Venhancer.Crowd.Identity.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<Response<CreateUserDto>> CreateUserCV([FromBody] CreateUserCVDto createUserCVDto)
+        public async Task<Response<NoDataDto>> UserRemove([FromBody] UserAppDto userAppDto)
         {
             try
             {
-                var createUserResponse = await CallAPIService.CallAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPICreateUserUrl, createUserCVDto, HttpContext.Session.GetString("AccessToken"), Method.Post);
-                var createUserData = JsonConvert.DeserializeObject<Response<CreateUserDto>>(createUserResponse);
+                var removeUserResponse = await CallAPIService.CallAPI(_apiOptions.CrowAPIBaseUrl, _apiOptions.CrowAPIRemoveUserUrl, userAppDto, HttpContext.Session.GetString("AccessToken"), Method.Post);
+                var removeUserData = JsonConvert.DeserializeObject<Response<NoDataDto>>(removeUserResponse);
 
-                if (!createUserData.IsSuccessful) return Response<CreateUserDto>.Fail(new ErrorDto(createUserData.Error.Errors, true), 404);
+                if (!removeUserData.IsSuccessful) return Response<NoDataDto>.Fail(new ErrorDto(removeUserData.Error.Errors, true), 404);
 
-                return Response<CreateUserDto>.Success(ObjectMapper.Mapper.Map<CreateUserDto>(createUserData.Data), 200);
+                return Response<NoDataDto>.Success(200);
             }
             catch (Exception ex)
             {
-                return Response<CreateUserDto>.Fail(new ErrorDto(ex.Message, true), 404);
+                return Response<NoDataDto>.Fail(new ErrorDto(ex.Message, true), 404);
             }
         }
     }

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography.X509Certificates;
 using Venhancer.Crowd.Identity.Core.Dtos;
 using Venhancer.Crowd.Identity.Core.Models;
 using Venhancer.Crowd.Identity.Core.Services;
+using Venhancer.Crowd.Identity.Data;
 using Venhancer.Crowd.Identity.Service.Mapping;
 using Venhancer.Crowd.Identity.Shared.Dtos;
 
@@ -11,9 +13,11 @@ namespace Venhancer.Crowd.Identity.Service.Services
     public class UserService : IUserService
     {
         private readonly UserManager<UserApp> _userManager;
-        public UserService(UserManager<UserApp> userManager)
+        private readonly AppDBContext _appDBContext;
+        public UserService(UserManager<UserApp> userManager,AppDBContext appDBContext)
         {
             _userManager = userManager;
+            _appDBContext = appDBContext;
         }
 
         public async Task<Response<UserAppDto>> CreateUserAsync(CreateUserDto createUserDto)
@@ -54,17 +58,15 @@ namespace Venhancer.Crowd.Identity.Service.Services
 
         public async Task<Response<List<UserAppDto>>> GetAllUserAsync()
         {
-            var user = await _userManager.Users.ToListAsync();
+            var user = await _userManager.Users.Where(x=> x.IsActive == true).ToListAsync();
             if (user == null) return Response<List<UserAppDto>>.Fail("User not found", 404, true);
             return Response<List<UserAppDto>>.Success(ObjectMapper.Mapper.Map<List<UserAppDto>>(user), 200);
         }
 
         public async Task<Response<NoDataDto>> RemoveUserAsync(UserAppDto userAppDto)
         {
-            var user = ObjectMapper.Mapper.Map<UserApp>(userAppDto);
-            user.IsActive = false;
-            var result = await _userManager.UpdateAsync(user);
-            if (result == null) return Response<NoDataDto>.Fail("User not found", 404, true);
+            var result = await _appDBContext.Database.ExecuteSqlInterpolatedAsync($"exec SP_REMOVE_USERS {userAppDto.Id}");
+            if (result == 0) return Response<NoDataDto>.Fail("User not found", 404, true);
             return Response<NoDataDto>.Success(200);
         }
     }
