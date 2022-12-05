@@ -11,7 +11,7 @@ namespace Venhancer.Crowd.Resume.Service.API.Mapping
             CreateMap<ResumeEntity, ResumeDto>().ReverseMap();
             CreateMap<CVTypeEntity, CVTypeDto>().ReverseMap();
             CreateMap<PersonelInformationEntity, PersonelInformationDto>().ReverseMap();
-            CreateMap<NotificationTypeEntity, NotificationTypeDto>().ReverseMap();
+            //CreateMap<NotificationTypeEntity, NotificationTypeDto>().ReverseMap();
         }
     }
 }

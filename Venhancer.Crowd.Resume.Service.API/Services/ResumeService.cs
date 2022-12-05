@@ -22,7 +22,7 @@ namespace Venhancer.Crowd.Resume.Service.API.Services
             _resumeCollection = database.GetCollection<ResumeEntity>(databaseSettings.ResumeCollection);
             _mapper = mapper;
         }
-        public async Task<Response<NoDataDto>> CreateAsync(ResumeDto resumeDto)
+        public async Task<Response<NoDataDto>> CreateResumeAsync(ResumeDto resumeDto)
         {
             try
             {
@@ -36,16 +36,18 @@ namespace Venhancer.Crowd.Resume.Service.API.Services
             return Response<NoDataDto>.Success(200);
         }
 
-        public Task<Response<List<ResumeDto>>> GetAllAsync()
+        public async Task<Response<ResumeDto>> GetResumeDataByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            var resumeobject = await _resumeCollection.Find(x => x.PersonelInformations.Any(t => t.Email == email)).ToListAsync();
+            if (resumeobject.Count == 0) return Response<ResumeDto>.Fail("Resume Data Not Found", 404, true);
+            return Response<ResumeDto>.Success(_mapper.Map<ResumeDto>(resumeobject.FirstOrDefault()), 200);
         }
-
-        public async Task<Response<ResumeDto>> GetByFirstNameAsync(string firstName)
+        public async Task<Response<NoDataDto>> UpdateResumeDataByEmailAsync(ResumeDto resumeDto,string email)
         {
-            var resumeobject = await _resumeCollection.Find(x => x.PersonelInformations.Any(t => t.FirstName == firstName)).ToListAsync();
-            if (resumeobject == null) Response<ResumeDto>.Fail("", 404, true);
-            return Response<ResumeDto>.Success(_mapper.Map<ResumeDto>(resumeobject), 200);
+            var resumeentity = _mapper.Map<ResumeEntity>(resumeDto);
+            var resumeobject = await _resumeCollection.ReplaceOneAsync(x => x.PersonelInformations.Any(t => t.Email == email), resumeentity);
+            if (resumeobject.ModifiedCount == 0) return Response<NoDataDto>.Fail("Resume Data Not Found", 404, true);
+            return Response<NoDataDto>.Success(200);
         }
     }
 }

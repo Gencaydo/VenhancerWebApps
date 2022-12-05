@@ -18,17 +18,24 @@ namespace Venhancer.Crowd.Resume.Service.API.Controllers
         //    var categories = await _categoryService.GetAllAsync();
         //    return ActionResultInstance(categories);
         //}
-        [HttpGet("firstname")]
-        public async Task<IActionResult> GetByFirstNameAsync(string firstname)
+        [HttpGet("Email")]
+        public async Task<IActionResult> GetResumeDataByEmailAsync(string email)
         {
-            var category = await _resumeService.GetByFirstNameAsync(firstname);
+            var category = await _resumeService.GetResumeDataByEmailAsync(email);
             return ActionResultInstance(category);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(ResumeDto resumeDto)
+        public async Task<IActionResult> CreateResumeAsync(ResumeDto resumeDto)
         {
-            var response = await _resumeService.CreateAsync(resumeDto);
+            var response = await _resumeService.CreateResumeAsync(resumeDto);
+            return ActionResultInstance(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateResumeDataByEmailAsync(ResumeDto resumeDto, string email)
+        {
+            var response = await _resumeService.UpdateResumeDataByEmailAsync(resumeDto, email);
             return ActionResultInstance(response);
         }
     }

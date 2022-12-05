@@ -5,8 +5,8 @@ namespace Venhancer.Crowd.Resume.Service.API.Services
 {
     public interface IResumeService
     {
-        Task<Response<List<ResumeDto>>> GetAllAsync();
-        Task<Response<NoDataDto>> CreateAsync(ResumeDto resumeDto);
-        Task<Response<ResumeDto>> GetByFirstNameAsync(string firstName);
+        Task<Response<NoDataDto>> CreateResumeAsync(ResumeDto resumeDto);
+        Task<Response<ResumeDto>> GetResumeDataByEmailAsync(string email);
+        Task<Response<NoDataDto>> UpdateResumeDataByEmailAsync(ResumeDto resumeDto,string email);
     }
 }
